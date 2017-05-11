@@ -13,7 +13,8 @@ export class Debounce implements OnInit {
     ngOnInit(): void {
         const eventStream = Observable.fromEvent(this.elementRef.nativeElement, 'keyup')
             .map(() => this.model.value)
-            .debounceTime(this.delay);
+            .debounceTime(this.delay)
+            .distinctUntilChanged()
 
         eventStream.subscribe(input => this.func.emit(input));
     }
